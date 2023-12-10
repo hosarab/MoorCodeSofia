@@ -32,13 +32,12 @@ namespace MoorCodeSofia.Tests.Unit.UserTasks.Commands
             var handler = new CreateUserTaskCommandHandler(
                 _userTaskRepositoryMock.Object,
                 _mapper.Object);
-            // act
 
+            // act
             Result<Guid> result = await handler.Handle(command, default);
 
 
             // assert
-            Assert.NotEmpty(new[] { result.Value });
             Assert.True(result.IsSuccess);
 
         }
