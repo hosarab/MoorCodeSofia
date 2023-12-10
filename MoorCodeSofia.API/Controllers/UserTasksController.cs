@@ -13,13 +13,7 @@ namespace MoorCodeSofia.API.Controllers
         {
         }
 
-        [HttpGet("getAllTasks")]
-        public async Task<IActionResult> GetAllUserTasks(CancellationToken cancellationToken)
-        {
-            var query = new GetAllUserTasksQuery(0, 10);
-            var response = await Sender.Send(query, cancellationToken);
-            return response.IsSuccess ? Ok(response) : NotFound(response.Error);
-        }
+        
 
 
         [HttpPost("create/")]
@@ -33,6 +27,52 @@ namespace MoorCodeSofia.API.Controllers
                 command.StartDate,
                 command.EndDate,
                 command.Subject);
+
+            var response = await Sender.Send(createCommand, cancellationToken);
+            return Ok(response);
+
+        }
+        [HttpGet("getAllTasks")]
+        public async Task<IActionResult> GetAllUserTasks(CancellationToken cancellationToken)
+        {
+            var query = new GetAllUserTasksQuery(0, 10);
+            var response = await Sender.Send(query, cancellationToken);
+            return response.IsSuccess ? Ok(response) : NotFound(response.Error);
+        }
+        [HttpGet("getTasksById")]
+        public async Task<IActionResult> GeTasksById(GetUserTaskCommand command, CancellationToken cancellationToken)
+        {
+            var createCommand = new GetUserTaskCommand(
+               command.id
+              );
+            var response = await Sender.Send(createCommand, cancellationToken);
+            return Ok(response);
+
+        }
+        [HttpPost("updateTask/")]
+        public async Task<IActionResult> UpdateUserTask(UpdateUserTaskCommand command,
+            CancellationToken cancellationToken)
+        {
+            var createCommand = new UpdateUserTaskCommand(
+                command.id,
+                command.User,
+                command.Description,
+                command.StartDate,
+                command.EndDate,
+                command.Subject);
+
+            var response = await Sender.Send(createCommand, cancellationToken);
+            return Ok(response);
+
+        }
+        
+        [HttpPost("deleteTask/")]
+        public async Task<IActionResult> DeleteUserTask(DeleteUserTaskCommand command,
+            CancellationToken cancellationToken)
+        {
+            var createCommand = new DeleteUserTaskCommand(
+                command.id
+               );
 
             var response = await Sender.Send(createCommand, cancellationToken);
             return Ok(response);

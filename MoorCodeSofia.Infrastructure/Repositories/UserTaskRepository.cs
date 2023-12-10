@@ -1,6 +1,6 @@
 ﻿using MoorCodeSofia.Domain;
 using MoorCodeSofia.Domain.Contracts;
-
+using System.Runtime.CompilerServices;
 
 namespace MoorCodeSofia.Infrastructure.Repositories
 {
@@ -22,16 +22,23 @@ namespace MoorCodeSofia.Infrastructure.Repositories
                 .ThenBy(p => p.User).ToList());
         }
 
-
-
-        public async Task<UserTask> GetTaskByIdAsync(Guid id, CancellationToken cancellationToken = default)
+        public async Task<UserTask> GetTaskByIdAsync(UserTask userTask, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return
+
+              await Task.FromResult(
+                GetAll().Where(x => x.Id==userTask.Id)
+                .OrderByDescending(p => p.StartDate)
+                .ThenBy(p => p.User).FirstOrDefault());
         }
 
-        public async Task<UserTask> DeleteTaskAsync(Guid id, CancellationToken cancellationToken = default)
+        public async Task<bool> DeleteTaskAsync(UserTask userTask, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            UserTask usrtask = DataSet.AllUserTasks.Where(x => x.Id == userTask.Id).FirstOrDefault();
+          await Task.Run(() => {
+                 DataSet.AllUserTasks.Remove(usrtask);
+            });
+            return true;    
         }
 
         public async Task<Guid> AddAsync(UserTask userTask, CancellationToken cancellationToken = default)
@@ -42,12 +49,19 @@ namespace MoorCodeSofia.Infrastructure.Repositories
             return userTask.Id;
             //._dbContext.Set<UserTask>().AddAsync(userTask, cancellationToken);
 
-
         }
-
-        public void Update(UserTask userTask)
+        public async Task<UserTask> Update(UserTask userTask, CancellationToken camCancellationToken = default)
         {
-            throw new NotImplementedException();
+            var dataToUpdate = DataSet.AllUserTasks.Where(x => x.Id == userTask.Id).FirstOrDefault();
+            await Task.Run(() =>
+             {
+                     dataToUpdate.Subject = userTask.Subject;
+                     dataToUpdate.User = userTask.User;
+                     dataToUpdate.Description = userTask.Description;
+                     dataToUpdate.EndDate = userTask.EndDate;
+                     dataToUpdate.StartDate = userTask.StartDate;
+             });
+            return dataToUpdate;
         }
     }
 }

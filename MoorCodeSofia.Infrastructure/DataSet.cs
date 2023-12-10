@@ -11,18 +11,18 @@ namespace MoorCodeSofia.Infrastructure
                 {
                     Id = Guid.NewGuid(),
                     StartDate = DateTime.Parse("08/12/2023"),
-                    Description = "",
+                    Description = "Nazdar Description",
                     EndDate = DateTime.Parse("18/12/2023"),
-                    Subject = "",
-                    User = "David"
+                    Subject = "Nazdar Subject",
+                    User = "Nazdar"
                 },
                 new UserTask
                 {
                     Id = Guid.NewGuid(),
                     StartDate = DateTime.Parse("08/12/2023"),
-                    Description = "",
+                    Description = "Murat Description",
                     EndDate = DateTime.Parse("18/12/2023"),
-                    Subject = "",
+                    Subject = "Murat Subject",
                     User = "Murat"
                 }
 
