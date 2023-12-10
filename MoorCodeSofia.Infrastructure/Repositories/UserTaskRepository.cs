@@ -8,8 +8,6 @@ namespace MoorCodeSofia.Infrastructure.Repositories
     {
         public IList<UserTask> GetAll() => DataSet.AllUserTasks;
 
-
-
         public async Task<List<UserTask>> GetAllTasksAsync(CancellationToken cancellationToken = default)
         {
             // return await _dbContext.Set<UserTask>().ToListAsync(cancellationToken: cancellationToken);
