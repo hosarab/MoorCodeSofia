@@ -13,9 +13,6 @@ namespace MoorCodeSofia.API.Controllers
         {
         }
 
-        
-
-
         [HttpPost("create/")]
         public async Task<IActionResult> CreateUserTask(CreateUserTaskCommand command,
             CancellationToken cancellationToken)
@@ -65,7 +62,7 @@ namespace MoorCodeSofia.API.Controllers
             return Ok(response);
 
         }
-        
+
         [HttpPost("deleteTask/")]
         public async Task<IActionResult> DeleteUserTask(DeleteUserTaskCommand command,
             CancellationToken cancellationToken)

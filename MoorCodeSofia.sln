@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoorCodeSofia.Domain", "Moo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoorCodeSofia.Application", "MoorCodeSofia.Application\MoorCodeSofia.Application.csproj", "{A35DE85B-B79B-40C3-863C-CEDB42C818E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoorCodeSofia.Tests.Unit", "MoorCodeSofia.Tests.Unit\MoorCodeSofia.Tests.Unit.csproj", "{99688B2B-E9F8-4D26-9AE7-01AF2F2EFC8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{A35DE85B-B79B-40C3-863C-CEDB42C818E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A35DE85B-B79B-40C3-863C-CEDB42C818E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A35DE85B-B79B-40C3-863C-CEDB42C818E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99688B2B-E9F8-4D26-9AE7-01AF2F2EFC8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99688B2B-E9F8-4D26-9AE7-01AF2F2EFC8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99688B2B-E9F8-4D26-9AE7-01AF2F2EFC8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99688B2B-E9F8-4D26-9AE7-01AF2F2EFC8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
