@@ -30,7 +30,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MoorCodeSofia.Application\MoorCodeSofia.Application.csproj" />
-    <ProjectReference Include="..\MoorCodeSofia.Infrastructure\MoorCodeSofia.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
