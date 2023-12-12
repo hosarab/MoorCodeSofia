@@ -13,7 +13,6 @@ namespace MoorCodeSofia.Infrastructure.Repositories
             // return await _dbContext.Set<UserTask>().ToListAsync(cancellationToken: cancellationToken);
 
             return
-
               await Task.FromResult(
                 GetAll()
                 .OrderByDescending(p => p.StartDate)
@@ -22,8 +21,8 @@ namespace MoorCodeSofia.Infrastructure.Repositories
 
         public async Task<UserTask> GetTaskByIdAsync(UserTask userTask, CancellationToken cancellationToken = default)
         {
+            if (userTask == null) return null;
             return
-
               await Task.FromResult(
                 GetAll().Where(x => x.Id==userTask.Id)
                 .OrderByDescending(p => p.StartDate)
@@ -33,10 +32,11 @@ namespace MoorCodeSofia.Infrastructure.Repositories
         public async Task<bool> DeleteTaskAsync(UserTask userTask, CancellationToken cancellationToken = default)
         {
             UserTask usrtask = DataSet.AllUserTasks.Where(x => x.Id == userTask.Id).FirstOrDefault();
-          await Task.Run(() => {
-                 DataSet.AllUserTasks.Remove(usrtask);
+            var x = false;
+            await Task.Run(() => {
+            x=     DataSet.AllUserTasks.Remove(usrtask);
             });
-            return true;    
+            return x;    
         }
 
         public async Task<Guid> AddAsync(UserTask userTask, CancellationToken cancellationToken = default)

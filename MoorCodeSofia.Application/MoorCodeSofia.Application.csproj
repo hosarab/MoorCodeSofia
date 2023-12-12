@@ -18,4 +18,8 @@
     <ProjectReference Include="..\MoorCodeSofia.Domain\MoorCodeSofia.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UserTasks\PropertyValidator\" />
+  </ItemGroup>
+
 </Project>
