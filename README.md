@@ -1,6 +1,18 @@
-# London Stock API
-Welcome to London Stock Web API
+# Ventures Lab Back-end challenge
+Welcome to MoorCodeSofia Web API
+# The Application
+Build an application to manage a user's tasks.
 
+- Create, delete and edit a task
+- List of today's and upcoming tasks, grouped by date and time
+
+Task must contain the data below:
+
+- User
+- Date
+- Start and end time
+- Subject
+- Description
 # About The Project
 The project contains implementation of a REST API called LondonStockApi and its underlying database. 
 
