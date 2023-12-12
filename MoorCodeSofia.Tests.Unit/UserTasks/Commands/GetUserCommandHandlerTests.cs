@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
+using FluentValidation.TestHelper;
 using MoorCodeSofia.Application.UserTasks.Commands;
+using MoorCodeSofia.Domain;
 using MoorCodeSofia.Domain.Contracts;
 using MoorCodeSofia.Domain.Shared;
-using Moq;
-using FluentValidation.TestHelper;
-using MoorCodeSofia.Domain;
 using MoorCodeSofia.Infrastructure;
+using Moq;
 
 namespace MoorCodeSofia.Tests.Unit.UserTasks.Commands
 {
-    
+
 
     public class GetUserCommandHandlerTests
     {
@@ -18,11 +18,11 @@ namespace MoorCodeSofia.Tests.Unit.UserTasks.Commands
         private readonly GetUserTaskCommandValidator _validator;
         public GetUserCommandHandlerTests()
         {
-             _userTaskRepositoryMock = new Mock<IUserTaskRepository>();
+            _userTaskRepositoryMock = new Mock<IUserTaskRepository>();
             _mapper = new Mock<IMapper>();
             _validator = new GetUserTaskCommandValidator();
         }
-        
+
 
 
         [Fact]
@@ -40,10 +40,9 @@ namespace MoorCodeSofia.Tests.Unit.UserTasks.Commands
             // act
             Result<UserTask> result = await handler.Handle(command, default);
 
-            // assert
-            Assert.NotEmpty(new[] { result.Value });
+            // assert;
             Assert.True(result.IsSuccess);
-            
+
 
         }
         [Fact]
@@ -59,6 +58,6 @@ namespace MoorCodeSofia.Tests.Unit.UserTasks.Commands
             result.ShouldNotHaveValidationErrorFor(x => x.id);
 
         }
-        
+
     }
 }

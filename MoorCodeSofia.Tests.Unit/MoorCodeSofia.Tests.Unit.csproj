@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoFixture" Version="4.18.1" />
     <PackageReference Include="FluentAssertions" Version="6.12.0" />
     <PackageReference Include="FluentValidation" Version="11.8.1" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
@@ -30,7 +31,6 @@
   <ItemGroup>
     <ProjectReference Include="..\MoorCodeSofia.Application\MoorCodeSofia.Application.csproj" />
     <ProjectReference Include="..\MoorCodeSofia.Infrastructure\MoorCodeSofia.Infrastructure.csproj" />
-    <ProjectReference Include="..\MoorCodeSofia.Application\MoorCodeSofia.Application.csproj" />
     <ProjectReference Include="..\MoorCodeSofia.Domain\MoorCodeSofia.Domain.csproj" />
   </ItemGroup>
 

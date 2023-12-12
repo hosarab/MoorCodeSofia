@@ -43,11 +43,11 @@ namespace MoorCodeSofia.API.Controllers
             {
                 return Ok();
             }
-            
+
             var getCommand = new GetUserTaskCommand(
                command.id
               );
-             
+
             var response = await Sender.Send(getCommand, cancellationToken);
             return Ok(response);
 
@@ -57,7 +57,7 @@ namespace MoorCodeSofia.API.Controllers
             CancellationToken cancellationToken)
         {
             var createCommand = new UpdateUserTaskCommand(
-                command.id,
+                command.Id,
                 command.User,
                 command.Description,
                 command.StartDate,

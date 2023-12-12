@@ -1,4 +1,12 @@
-﻿namespace MoorCodeSofia.Tests.Unit.UserTasks.Commands
+﻿using AutoMapper;
+using FluentValidation.TestHelper;
+using MoorCodeSofia.Application.UserTasks.Commands;
+using MoorCodeSofia.Domain;
+using MoorCodeSofia.Domain.Contracts;
+using MoorCodeSofia.Domain.Shared;
+using Moq;
+
+namespace MoorCodeSofia.Tests.Unit.UserTasks.Commands
 {
 
     public class CreateUserCommandHandlerTests

@@ -21,7 +21,7 @@ namespace MoorCodeSofia.Application.UserTasks.Commands
             var userTask = new UserTask()
             {
                 User = request.User,
-                Id = request.id,
+                Id = request.Id,
                 StartDate = request.StartDate,
                 EndDate = request.EndDate,
                 Description = request.Description,
@@ -29,7 +29,7 @@ namespace MoorCodeSofia.Application.UserTasks.Commands
             };
 
 
-         var res= await _userTaskRepository.Update(userTask, cancellationToken);
+            var res = await _userTaskRepository.Update(userTask, cancellationToken);
             return res;
         }
     }

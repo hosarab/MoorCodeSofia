@@ -1,4 +1,13 @@
-﻿namespace MoorCodeSofia.Tests.Unit.UserTasks.Commands
+﻿using AutoMapper;
+using FluentAssertions;
+using FluentValidation.TestHelper;
+using MoorCodeSofia.Application.UserTasks.Commands;
+using MoorCodeSofia.Domain;
+using MoorCodeSofia.Domain.Contracts;
+using MoorCodeSofia.Domain.Shared;
+using Moq;
+
+namespace MoorCodeSofia.Tests.Unit.UserTasks.Commands
 {
     public class DeleteUserCommandHandlerTests
     {
@@ -18,10 +27,17 @@
         public async Task Handle_Should_DeleteUserTask_Successfully()
         {
             // arrange
-            var command = new DeleteUserTaskCommand(
-            Guid.Parse("b3c9322c-9743-48c3-aa48-a903418549f6"));
+            var command = new DeleteUserTaskCommand(Guid.NewGuid());
+
+            _userTaskRepositoryMock.Setup(m => m.DeleteTaskAsync(
+                It.IsAny<UserTask>(),
+                It.IsAny<CancellationToken>())).ReturnsAsync(true)
+                .Verifiable();
+
+
 
             var handler = new DeleteUserTaskCommandHandler(
+
                 _userTaskRepositoryMock.Object,
                 _mapper.Object);
 
@@ -29,11 +45,16 @@
             Result<bool> result = await handler.Handle(command, default);
 
             // assert
-            Assert.NotEmpty(new[] { result.Value });
-            Assert.True(result.IsSuccess);
+
+            _userTaskRepositoryMock.Verify(x =>
+                    x.DeleteTaskAsync(
+                        It.IsAny<UserTask>(),
+                        It.IsAny<CancellationToken>()), Times.Once);
 
 
+            result.IsSuccess.Should().BeTrue();
         }
+
         [Fact]
         public async Task Id_Should_Be_NotNull_DeleteUserTask()
         {
@@ -44,13 +65,7 @@
             var result = _validator.TestValidate(command);
 
             // assert
-            _userTaskRepositoryMock.Verify(
-                x => x.AddAsync(It.IsAny<UserTask>(), It.IsAny<CancellationToken>()),
-                Times.Once);
-            result.IsSuccess.Should().BeTrue();
-            Assert.True(result.IsSuccess);
-            Guid.TryParse(result.Value.ToString(), out var guid);
-            guid.Should().NotBeEmpty();
+            result.ShouldNotHaveValidationErrorFor(x => x.id);
 
         }
 
