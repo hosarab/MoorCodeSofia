@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MoorCodeSofia.Application.UserTasks.Commands
 {
-    internal class DeleteUserTaskCommandHandler : ICommandHandler<DeleteUserTaskCommand, bool>
+    public class DeleteUserTaskCommandHandler : ICommandHandler<DeleteUserTaskCommand, bool>
     {
         private readonly IMapper _mapper;
         IUserTaskRepository _userTaskRepository;
@@ -27,7 +27,7 @@ namespace MoorCodeSofia.Application.UserTasks.Commands
             var userTask = new UserTask()
             {
               
-                Id = request.id,
+                Id = request.id
                
             };
             var res = await _userTaskRepository.DeleteTaskAsync(userTask, cancellationToken);

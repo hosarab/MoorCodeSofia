@@ -3,15 +3,10 @@ using MoorCodeSofia.Application.Abstractions;
 using MoorCodeSofia.Domain;
 using MoorCodeSofia.Domain.Contracts;
 using MoorCodeSofia.Domain.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MoorCodeSofia.Application.UserTasks.Commands
 {
-    internal class UpdateUserTaskCommandHandler : ICommandHandler<UpdateUserTaskCommand, UserTask>
+    public class UpdateUserTaskCommandHandler : ICommandHandler<UpdateUserTaskCommand, UserTask>
     {
         private readonly IUserTaskRepository _userTaskRepository;
         private readonly IMapper _mapper;
