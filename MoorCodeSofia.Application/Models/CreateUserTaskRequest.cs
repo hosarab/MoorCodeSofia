@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MoorCodeSofia.Application.Models
+﻿namespace MoorCodeSofia.Application.Models
 {
-    internal class CreateUserTaskRequest
-    {
-    }
+    public record CreateUserTaskRequest(
+        Guid Id,
+        string User,
+        string Description,
+        DateTime StartDate,
+        DateTime EndDate,
+        string Subject);
 }

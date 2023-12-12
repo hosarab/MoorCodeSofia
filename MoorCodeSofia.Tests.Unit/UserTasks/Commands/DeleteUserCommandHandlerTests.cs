@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using FluentAssertions;
 using MoorCodeSofia.Application.UserTasks.Commands;
+using MoorCodeSofia.Domain;
 using MoorCodeSofia.Domain.Contracts;
 using MoorCodeSofia.Domain.Shared;
 using Moq;
@@ -23,6 +25,7 @@ namespace MoorCodeSofia.Tests.Unit.UserTasks.Commands
         {
             // arrange
             var command = new CreateUserTaskCommand(
+
                 "David",
                 "Description",
                 new DateTime(2023, 12, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -38,7 +41,13 @@ namespace MoorCodeSofia.Tests.Unit.UserTasks.Commands
 
 
             // assert
+            _userTaskRepositoryMock.Verify(
+                x => x.AddAsync(It.IsAny<UserTask>(), It.IsAny<CancellationToken>()),
+                Times.Once);
+            result.IsSuccess.Should().BeTrue();
             Assert.True(result.IsSuccess);
+            Guid.TryParse(result.Value.ToString(), out var guid);
+            guid.Should().NotBeEmpty();
 
         }
 
