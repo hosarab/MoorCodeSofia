@@ -21,8 +21,8 @@ The project contains a REST API called MoorCodeSofiaApi.
 
 UserTask <br>
 __POST /api/userTasks/create__ add a user tasks.<br>
-__GET /api/userTasks/getAllTasks__ get all user tasks.<br>
-__GET /api/userTasks/getTasksById{id:guid}__ get a detail of a user task.<br>
+__GET  /api/userTasks/getAllTasks__ get all user tasks.<br>
+__GET  /api/userTasks/getTasksById{id:guid}__ get a detail of a user task.<br>
 __POST /api/userTasks/updateTask__ update a user task.<br>
 __POST /api/userTasks/deleteTask__ remove a user task.<br>
 
