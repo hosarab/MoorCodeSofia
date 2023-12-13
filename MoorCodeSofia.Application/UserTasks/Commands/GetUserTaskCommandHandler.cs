@@ -3,11 +3,6 @@ using MoorCodeSofia.Application.Abstractions;
 using MoorCodeSofia.Domain;
 using MoorCodeSofia.Domain.Contracts;
 using MoorCodeSofia.Domain.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MoorCodeSofia.Application.UserTasks.Commands
 {
@@ -23,14 +18,14 @@ namespace MoorCodeSofia.Application.UserTasks.Commands
 
         public async Task<Result<UserTask>> Handle(GetUserTaskCommand request, CancellationToken cancellationToken)
         {
-            
-                var userTask = new UserTask()
-                {
-                    Id = request.id,
-                };
-               var response = await  _userTaskRepository.GetTaskByIdAsync(userTask, cancellationToken) ?? new UserTask();
-                if (response == null) {response = new UserTask();}
-            
+
+            var userTask = new UserTask()
+            {
+                Id = request.Id,
+            };
+            var response = await _userTaskRepository.GetTaskByIdAsync(userTask, cancellationToken) ?? new UserTask();
+            if (response == null) { response = new UserTask(); }
+
             return response;
         }
     }

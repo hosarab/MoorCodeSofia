@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using AutoFixture;
+using AutoMapper;
 using FluentAssertions;
 using FluentValidation.TestHelper;
 using MoorCodeSofia.Application.UserTasks.Commands;
@@ -11,17 +12,10 @@ namespace MoorCodeSofia.Tests.Unit.UserTasks.Commands
 {
     public class DeleteUserCommandHandlerTests
     {
-        private readonly Mock<IUserTaskRepository> _userTaskRepositoryMock;
-        private readonly Mock<IMapper> _mapper;
-        private readonly DeleteUserTaskCommandValidator _validator;
-        public DeleteUserCommandHandlerTests()
-        {
-            _userTaskRepositoryMock = new Mock<IUserTaskRepository>();
-            _mapper = new Mock<IMapper>();
-            _validator = new DeleteUserTaskCommandValidator();
-        }
-
-
+        private readonly Mock<IUserTaskRepository> _userTaskRepositoryMock = new();
+        private readonly Mock<IMapper> _mapper = new();
+        private readonly DeleteUserTaskCommandValidator _validator = new();
+        private readonly Fixture _fixture = new();
 
         [Fact]
         public async Task Handle_Should_DeleteUserTask_Successfully()
@@ -33,8 +27,6 @@ namespace MoorCodeSofia.Tests.Unit.UserTasks.Commands
                 It.IsAny<UserTask>(),
                 It.IsAny<CancellationToken>())).ReturnsAsync(true)
                 .Verifiable();
-
-
 
             var handler = new DeleteUserTaskCommandHandler(
 
@@ -51,7 +43,6 @@ namespace MoorCodeSofia.Tests.Unit.UserTasks.Commands
                         It.IsAny<UserTask>(),
                         It.IsAny<CancellationToken>()), Times.Once);
 
-
             result.IsSuccess.Should().BeTrue();
         }
 
@@ -59,10 +50,9 @@ namespace MoorCodeSofia.Tests.Unit.UserTasks.Commands
         public async Task Id_Should_Be_NotNull_DeleteUserTask()
         {
             // arrange
-            var command = new DeleteUserTaskCommand(
-                  Guid.Parse("a907d1a4-2874-48a6-abc7-f76045bdbe8e"));
+            var command = _fixture.Create<DeleteUserTaskCommand>();
             // act
-            var result = _validator.TestValidate(command);
+            var result = await Task.Run(() => _validator.TestValidate(command));
 
             // assert
             result.ShouldNotHaveValidationErrorFor(x => x.id);

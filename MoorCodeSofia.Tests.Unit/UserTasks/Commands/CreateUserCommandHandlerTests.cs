@@ -8,19 +8,11 @@ using Moq;
 
 namespace MoorCodeSofia.Tests.Unit.UserTasks.Commands
 {
-
     public class CreateUserCommandHandlerTests
     {
-        private readonly Mock<IUserTaskRepository> _userTaskRepositoryMock;
-        private readonly Mock<IMapper> _mapper;
-        private readonly CreateUserTaskCommandValidator _validator;
-        public CreateUserCommandHandlerTests()
-        {
-            _userTaskRepositoryMock = new Mock<IUserTaskRepository>();
-            _mapper = new Mock<IMapper>();
-            _validator = new CreateUserTaskCommandValidator();
-        }
-
+        private readonly Mock<IUserTaskRepository> _userTaskRepositoryMock = new();
+        private readonly Mock<IMapper> _mapper = new();
+        private readonly CreateUserTaskCommandValidator _validator = new();
 
         [Fact]
         public async Task Handle_Should_CreateUserTask_Successfully()
@@ -51,7 +43,6 @@ namespace MoorCodeSofia.Tests.Unit.UserTasks.Commands
             Result<Guid> result = await handler.Handle(command, default);
 
             // assert
-            Assert.NotEmpty(new[] { result.Value });
             Assert.True(result.IsSuccess);
 
 
@@ -67,7 +58,7 @@ namespace MoorCodeSofia.Tests.Unit.UserTasks.Commands
                 new DateTime(2023, 12, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
                 "Subject");
             // act
-            var result = _validator.TestValidate(command);
+            var result = await Task.Run(() => _validator.TestValidate(command));
 
             // assert
             result.ShouldNotHaveValidationErrorFor(x => x.StartDate);
@@ -84,7 +75,7 @@ namespace MoorCodeSofia.Tests.Unit.UserTasks.Commands
                 new DateTime(2023, 12, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                 "Subject");
             // act
-            var result = _validator.TestValidate(command);
+            var result = await Task.Run(() => _validator.TestValidate(command));
 
             // assert
             result.ShouldHaveValidationErrorFor(x => x.StartDate);
@@ -101,7 +92,7 @@ namespace MoorCodeSofia.Tests.Unit.UserTasks.Commands
                 new DateTime(2023, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                 "Subject");
             // act
-            var result = _validator.TestValidate(command);
+            var result = await Task.Run(() => _validator.TestValidate(command));
 
             // assert
             result.ShouldNotHaveValidationErrorFor(x => x.EndDate);
@@ -118,7 +109,7 @@ namespace MoorCodeSofia.Tests.Unit.UserTasks.Commands
                 new DateTime(2023, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                 "Subject");
             // act
-            var result = _validator.TestValidate(command);
+            var result = await Task.Run(() => _validator.TestValidate(command));
 
             // assert
             result.ShouldNotHaveValidationErrorFor(x => x.EndDate);

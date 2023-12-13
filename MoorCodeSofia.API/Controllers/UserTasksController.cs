@@ -39,13 +39,13 @@ namespace MoorCodeSofia.API.Controllers
         [HttpGet("getTasksById")]
         public async Task<IActionResult> GeTasksById(GetUserTaskCommand command, CancellationToken cancellationToken)
         {
-            if (command.id == Guid.Empty)
+            if (command.Id == Guid.Empty)
             {
                 return Ok();
             }
 
             var getCommand = new GetUserTaskCommand(
-               command.id
+               command.Id
               );
 
             var response = await Sender.Send(getCommand, cancellationToken);
